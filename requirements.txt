@@ -7,3 +7,4 @@ sentence-transformers
 pandas
 python-dotenv
 langchain-huggingface
+langchain-community

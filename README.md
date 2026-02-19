@@ -2,6 +2,93 @@
 
 A production-ready multi-agent customer support system for TechFlow Electronics that handles Care+ insurance plan cancellations, retention attempts, and customer inquiries using LangChain, LangGraph, and Google Gemini.
 
+## Getting Started
+
+### Prerequisites
+
+- **Python 3.13** (recommended) or Python 3.10+
+- **Google Gemini API key** - Get your API key from [Google AI Studio](https://makersuite.google.com/app/apikey)
+- **Git** (for cloning the repository)
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Bakar-se/multi-agentic-support-system.git
+   cd multi-agentic-support-system
+   ```
+
+2. **Create a virtual environment with Python 3.13:**
+   ```bash
+   python3.13 -m venv venv
+   ```
+   
+   If Python 3.13 is not available, you can use Python 3.10+:
+   ```bash
+   python3 -m venv venv
+   ```
+
+3. **Activate the virtual environment:**
+   
+   On macOS/Linux:
+   ```bash
+   source venv/bin/activate
+   ```
+   
+   On Windows:
+   ```bash
+   venv\Scripts\activate
+   ```
+
+4. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+5. **Set up environment variables:**
+   
+   Create a `.env` file in the project root:
+   ```bash
+   echo "GOOGLE_API_KEY=your_gemini_api_key_here" > .env
+   ```
+   
+   Or manually create `.env` and add:
+   ```
+   GOOGLE_API_KEY=your_gemini_api_key_here
+   ```
+   
+   Alternatively, export directly in your terminal:
+   ```bash
+   export GOOGLE_API_KEY=your_gemini_api_key_here
+   ```
+
+### Running the Project
+
+**Start the application:**
+```bash
+python main.py
+```
+
+Or if using the virtual environment directly:
+```bash
+venv/bin/python main.py
+```
+
+**Application Options:**
+1. **Run all test scenarios** - Automated testing of all 5 predefined scenarios
+2. **Interactive mode** - Manual conversation testing with custom messages
+3. **Single test scenario** - Run one specific test scenario (1-5)
+4. **Exit** - Quit the application
+
+### Quick Test
+
+To verify everything is set up correctly:
+```bash
+python main.py
+# Select option 3 (Single test scenario)
+# Enter scenario number: 1
+```
+
 ## Overview
 
 This system assists customers who want to cancel their Care+ phone insurance plan, attempts retention where appropriate, and routes non-cancellation requests correctly. It uses a multi-agent architecture where specialized agents handle different aspects of customer interactions, all orchestrated by LangGraph.
@@ -98,45 +185,14 @@ This system assists customers who want to cancel their Care+ phone insurance pla
 
 ## How to Run the System
 
-### Prerequisites
-
-- Python 3.10 or higher
-- Google Gemini API key (set as environment variable `GOOGLE_API_KEY`)
-
-### Installation
-
-1. **Clone the repository** (if applicable) or navigate to the project directory
-
-2. **Create a virtual environment:**
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
-
-3. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Set up environment variables:**
-   Create a `.env` file in the project root:
-   ```bash
-   GOOGLE_API_KEY=your_gemini_api_key_here
-   ```
-   
-   Or export directly:
-   ```bash
-   export GOOGLE_API_KEY=your_gemini_api_key_here
-   ```
-
-### Running the System
+> **Note:** For detailed installation and setup instructions, see the [Getting Started](#getting-started) section above.
 
 **Start the main application:**
 ```bash
 python main.py
 ```
 
-**Options:**
+**Application Options:**
 1. Run all test scenarios (automated testing)
 2. Interactive mode (manual conversation testing)
 3. Single test scenario (run one specific scenario)
@@ -306,7 +362,7 @@ multi-agentic-support-system/
 
 ## Technology Stack
 
-- **Python 3.10+**
+- **Python 3.13** (recommended) or Python 3.10+
 - **LangChain** - LLM framework and tooling
 - **LangGraph** - Multi-agent orchestration
 - **Google Gemini 1.5 Flash** - Language model

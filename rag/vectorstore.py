@@ -8,7 +8,7 @@ and provides a retriever interface for document queries.
 from typing import Optional
 
 from langchain_core.retrievers import BaseRetriever
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 
 from rag.loader import load_documents
