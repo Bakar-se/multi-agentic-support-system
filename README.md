@@ -127,7 +127,10 @@ This system assists customers who want to cancel their Care+ phone insurance pla
 ### Component Flow
 
 1. **Orchestrator Agent** classifies intent and routes to appropriate agent
-2. **Retention Agent** handles cancellations, retrieves customer data, queries RAG, generates offers
+2. **Specialized Agents** handle specific request types:
+   - **Retention Agent** handles cancellations, retrieves customer data, queries RAG, generates offers
+   - **Tech Support Agent** handles technical issues, queries troubleshooting guide via RAG
+   - **Billing Agent** handles billing questions, retrieves customer data, queries billing policies via RAG
 3. **Processor Agent** executes confirmed cancellations and logs actions
 4. **Shared State** (`ConversationState`) persists across all agent transitions
 5. **RAG System** provides policy document retrieval via FAISS vector store
@@ -148,7 +151,7 @@ This system assists customers who want to cancel their Care+ phone insurance pla
 **Constraints:**
 - Does NOT attempt retention or cancellation
 - Outputs structured JSON for routing decisions
-- Uses Gemini 1.5 Flash with structured output
+- Uses Gemini 2.5 Flash with structured output
 
 ### 2. Retention & Problem-Solving Agent
 
@@ -182,6 +185,39 @@ This system assists customers who want to cancel their Care+ phone insurance pla
 - Does NOT attempt persuasion
 - Procedural and concise communication
 - Executes only after explicit user confirmation
+
+### 4. Technical Support Agent
+
+**Location:** `agents/tech_support.py`
+
+**Responsibilities:**
+- Handles technical issue conversations
+- Queries RAG retriever for troubleshooting guide context
+- Provides step-by-step technical guidance
+- Sets appropriate final action for routing
+
+**Behavior Rules:**
+- MUST use RAG to retrieve relevant troubleshooting information
+- MUST provide clear, actionable technical guidance
+- MUST NOT attempt retention or offer discounts
+- Focuses solely on resolving technical issues
+
+### 5. Billing Agent
+
+**Location:** `agents/billing.py`
+
+**Responsibilities:**
+- Handles billing question conversations
+- Retrieves customer data (if email available) using `get_customer_data` tool
+- Queries RAG retriever for billing and policy information
+- Provides clear billing explanations
+- Sets appropriate final action for routing
+
+**Behavior Rules:**
+- MUST use RAG to retrieve relevant billing and policy information
+- MUST provide clear, accurate billing information
+- MUST NOT attempt retention or offer discounts
+- Focuses solely on resolving billing questions
 
 ## How to Run the System
 
@@ -312,12 +348,12 @@ python main.py
 **4. Technical support request**
 - Customer: `james.wilson@email.com`
 - Message: "My phone battery is draining really fast. Can you help me fix this?"
-- Expected: Intent `technical_issue`, routed to end (no retention attempt)
+- Expected: Intent `technical_issue`, routed to `tech_support_agent` (with RAG retrieval, no retention attempt)
 
 **5. Billing discrepancy inquiry**
 - Customer: `maria.garcia@email.com`
 - Message: "I was charged $12.99 this month but I thought my plan was $6.99. Can you explain the charge?"
-- Expected: Intent `billing_question`, routed to end (no retention attempt)
+- Expected: Intent `billing_question`, routed to `billing_agent` (with customer data and RAG retrieval, no retention attempt)
 
 ### Running Single Scenario
 
@@ -342,7 +378,9 @@ multi-agentic-support-system/
 ├── agents/
 │   ├── orchestrator.py    # Intent classification and routing
 │   ├── retention.py       # Retention and problem-solving
-│   └── processor.py       # Cancellation processing
+│   ├── processor.py       # Cancellation processing
+│   ├── tech_support.py   # Technical support handling
+│   └── billing.py        # Billing question handling
 ├── data/
 │   ├── customers.csv           # Customer profiles
 │   ├── retention_rules.json    # Business rules for offers
@@ -357,6 +395,7 @@ multi-agentic-support-system/
 ├── graph.py               # LangGraph workflow definition
 ├── main.py                # CLI entry point
 ├── requirements.txt       # Python dependencies
+├── TEST_REPORT.md         # Test execution report
 └── README.md             # This file
 ```
 
@@ -365,10 +404,18 @@ multi-agentic-support-system/
 - **Python 3.13** (recommended) or Python 3.10+
 - **LangChain** - LLM framework and tooling
 - **LangGraph** - Multi-agent orchestration
-- **Google Gemini 1.5 Flash** - Language model
+- **Google Gemini 2.5 Flash** - Language model
 - **FAISS** - Vector similarity search
 - **SentenceTransformers** - Text embeddings
 - **Pandas** - Data processing
+- **langchain-huggingface** - HuggingFace embeddings integration
+- **langchain-community** - Community integrations
+
+## Documentation
+
+- **[TOOL_CALLS_AND_RAG.md](TOOL_CALLS_AND_RAG.md)** - Demonstrates tool calls and RAG queries in action
+- **[LANGCHAIN_ARCHITECTURE.md](LANGCHAIN_ARCHITECTURE.md)** - Explains the LangChain architecture
+- **[TEST_REPORT.md](TEST_REPORT.md)** - Comprehensive test execution report
 
 ## Observability
 

@@ -1,0 +1,506 @@
+(venv) bakar@Bakars-Mac-Studio multi-agentic-support-system % python main.py
+
+[Graph] LangGraph workflow compiled successfully
+[Graph] Nodes: orchestrator_agent -> [retention_agent -> processor_agent | tech_support_agent | billing_agent]
+[Graph] Routing: Based on intent and cancellation confirmation
+
+================================================================================
+🤖 Multi-Agent Customer Support System
+================================================================================
+
+Options:
+  1. Run all test scenarios
+  2. Interactive mode
+  3. Single test scenario
+  4. Exit
+
+Select option (1-4): 1
+
+================================================================================
+🚀 RUNNING ALL TEST SCENARIOS
+================================================================================
+
+================================================================================
+
+🧪 TEST SCENARIO: 1. Affordability-based cancellation
+
+================================================================================
+
+
+💬 User Message: I want to cancel my Care+ plan. It's too expensive and I can't afford it anymore.
+📧 Customer Email: sarah.chen@email.com
+
+[Orchestrator] Intent: cancel_insurance
+[Orchestrator] Email: sarah.chen@email.com
+[Orchestrator] Cancellation reason: financial_hardship
+[Graph] Routing to retention_agent for cancellation handling
+
+[Retention Agent] Processing cancellation request for sarah.chen@email.com
+[Retention Agent] Cancellation reason: financial_hardship
+[Retention Agent] Retrieving customer data...
+[Retention Agent] Customer tier: premium
+[Retention Agent] Customer: Sarah Chen - Care+ Premium
+[Retention Agent] Querying RAG for policy context...
+📄 Loading policy documents...
+✅ Loaded 2 chunks from return_policy.md
+✅ Loaded 3 chunks from care_plus_benefits.md
+✅ Loaded 3 chunks from troubleshooting_guide.md
+
+📚 Total chunks loaded: 8
+🧠 Creating embeddings for 8 chunks...
+📦 Building FAISS index...
+✅ FAISS vector store built successfully
+
+[Retention Agent] Retrieved from care_plus_benefits.md:
+  ## Care+ Basic ($6.99/month)
+
+### Core Protection
+- **Screen Repair**: $29 deductible for cracked screen repairs
+- **Hardware Defects**: Standard warranty extension coverage
+- **Basic Support**: Stand...
+
+[Retention Agent] Retrieved from care_plus_benefits.md:
+  ### Preventive Care
+- Regular device health checkups
+- Software optimization and cleanup
+- Early warning for potential hardware issues
+- Proactive battery health monitoring
+
+### Family Benefits
+- One ...
+
+[Retention Agent] Retrieved from care_plus_benefits.md:
+  # TechFlow Care+ Benefits Guide
+
+## Care+ Premium ($12.99/month)
+
+### Accident Protection
+- **Screen Repair**: Zero deductible for cracked screens (normally $300+ repair cost)
+- **Water Damage**: Full...
+[Retention Agent] Calculating retention offer for tier=premium, reason=financial_hardship...
+[Retention Agent] Generated offer: pause
+[Retention Agent] Offer details: Pause subscription for 6 months with no charges
+
+[Retention Agent] Generated response:
+  Oh, Sarah, I'm so sorry to hear that you're finding your Care+ plan too expensive right now. I completely understand that financial situations can change, and we want to be as supportive as possible.
+
+Your Care+ Premium plan offers really comprehensive protection, like zero deductible screen repairs...
+[Graph] Waiting for user response or retention in progress - ending
+
+================================================================================
+
+📍 Current Agent: Final State
+
+================================================================================
+
+📊 State Information:
+  Intent: cancel_insurance
+  Customer Email: sarah.chen@email.com
+  Cancellation Reason: financial_hardship
+  Customer: Sarah Chen (premium tier)
+  Plan: Care+ Premium
+
+  💰 Retention Offer:
+    Type: pause
+    Description: Pause subscription for 6 months with no charges
+    Duration: 6 months
+
+  📚 Retrieved RAG Context (3 chunks):
+    1. [care_plus_benefits.md] [care_plus_benefits.md] ## Care+ Basic ($6.99/month)
+
+### Core Protection
+- **Screen Repair**: $29 deductible for cracked screen repairs
+- **Hardware ...
+    2. [care_plus_benefits.md] [care_plus_benefits.md] ### Preventive Care
+- Regular device health checkups
+- Software optimization and cleanup
+- Early warning for potential hardwar...
+    3. [care_plus_benefits.md] [care_plus_benefits.md] # TechFlow Care+ Benefits Guide
+
+## Care+ Premium ($12.99/month)
+
+### Accident Protection
+- **Screen Repair**: Zero deductible...
+
+================================================================================
+
+📋 Summary:
+  Intent Classified: cancel_insurance
+  Customer Data Retrieved: Yes
+  RAG Context Retrieved: 3 chunks
+  Retention Offer Generated: Yes
+  Final Action: None
+
+================================================================================
+
+
+Press Enter to continue to next scenario...
+
+================================================================================
+
+🧪 TEST SCENARIO: 2. Device malfunction + cancellation
+
+================================================================================
+
+
+💬 User Message: My phone keeps overheating and I want to cancel my insurance because the device is defective.
+📧 Customer Email: mike.rodriguez@email.com
+
+[Orchestrator] Intent: cancel_insurance
+[Orchestrator] Email: mike.rodriguez@email.com
+[Orchestrator] Cancellation reason: product_issues
+[Graph] Routing to retention_agent for cancellation handling
+
+[Retention Agent] Processing cancellation request for mike.rodriguez@email.com
+[Retention Agent] Cancellation reason: product_issues
+[Retention Agent] Retrieving customer data...
+[Retention Agent] Customer tier: new
+[Retention Agent] Customer: Mike Rodriguez - Care+ Premium
+[Retention Agent] Querying RAG for policy context...
+
+[Retention Agent] Retrieved from care_plus_benefits.md:
+  # TechFlow Care+ Benefits Guide
+
+## Care+ Premium ($12.99/month)
+
+### Accident Protection
+- **Screen Repair**: Zero deductible for cracked screens (normally $300+ repair cost)
+- **Water Damage**: Full...
+
+[Retention Agent] Retrieved from care_plus_benefits.md:
+  ## Care+ Basic ($6.99/month)
+
+### Core Protection
+- **Screen Repair**: $29 deductible for cracked screen repairs
+- **Hardware Defects**: Standard warranty extension coverage
+- **Basic Support**: Stand...
+
+[Retention Agent] Retrieved from troubleshooting_guide.md:
+  # TechFlow Device Troubleshooting Guide
+
+## Common Phone Issues
+
+### Overheating Problems
+**Symptoms**: Device feels hot, performance slows down, battery drains quickly
+
+**Quick Fixes**:
+- Remove phon...
+[Retention Agent] Calculating retention offer for tier=new, reason=product_issues...
+[Retention Agent] Generated offer: device_replacement
+[Retention Agent] Offer details: Free replacement device
+
+[Retention Agent] Generated response:
+  Hi Mike, I'm really sorry to hear your phone is overheating and causing you trouble. That's incredibly frustrating, and I completely understand why you'd be concerned about a defective device.
+
+It sounds like you're experiencing a hardware issue, and I want to assure you that your Care+ Premium plan...
+[Graph] Waiting for user response or retention in progress - ending
+
+================================================================================
+
+📍 Current Agent: Final State
+
+================================================================================
+
+📊 State Information:
+  Intent: cancel_insurance
+  Customer Email: mike.rodriguez@email.com
+  Cancellation Reason: product_issues
+  Customer: Mike Rodriguez (new tier)
+  Plan: Care+ Premium
+
+  💰 Retention Offer:
+    Type: device_replacement
+    Description: Free replacement device
+
+  📚 Retrieved RAG Context (3 chunks):
+    1. [care_plus_benefits.md] [care_plus_benefits.md] # TechFlow Care+ Benefits Guide
+
+## Care+ Premium ($12.99/month)
+
+### Accident Protection
+- **Screen Repair**: Zero deductible...
+    2. [care_plus_benefits.md] [care_plus_benefits.md] ## Care+ Basic ($6.99/month)
+
+### Core Protection
+- **Screen Repair**: $29 deductible for cracked screen repairs
+- **Hardware ...
+    3. [troubleshooting_guide.md] [troubleshooting_guide.md] # TechFlow Device Troubleshooting Guide
+
+## Common Phone Issues
+
+### Overheating Problems
+**Symptoms**: Device feels hot, p...
+
+================================================================================
+
+📋 Summary:
+  Intent Classified: cancel_insurance
+  Customer Data Retrieved: Yes
+  RAG Context Retrieved: 3 chunks
+  Retention Offer Generated: Yes
+  Final Action: None
+
+================================================================================
+
+
+Press Enter to continue to next scenario...
+
+================================================================================
+
+🧪 TEST SCENARIO: 3. Value questioning
+
+================================================================================
+
+
+💬 User Message: I'm thinking about canceling. I've had the plan for 8 months and haven't used it once. Is it really worth it?
+📧 Customer Email: lisa.kim@email.com
+
+[Orchestrator] Intent: cancel_insurance
+[Orchestrator] Email: lisa.kim@email.com
+[Orchestrator] Cancellation reason: service_value
+[Graph] Routing to retention_agent for cancellation handling
+
+[Retention Agent] Processing cancellation request for lisa.kim@email.com
+[Retention Agent] Cancellation reason: service_value
+[Retention Agent] Retrieving customer data...
+[Retention Agent] Customer tier: premium
+[Retention Agent] Customer: Lisa Kim - Care+ Premium
+[Retention Agent] Querying RAG for policy context...
+
+[Retention Agent] Retrieved from care_plus_benefits.md:
+  ## Care+ Basic ($6.99/month)
+
+### Core Protection
+- **Screen Repair**: $29 deductible for cracked screen repairs
+- **Hardware Defects**: Standard warranty extension coverage
+- **Basic Support**: Stand...
+
+[Retention Agent] Retrieved from return_policy.md:
+  # TechFlow Electronics Return Policy
+
+## Return Windows
+
+### Standard Return Policy
+- Unopened devices: 30 days from purchase date
+- Opened devices: 14 days from purchase date
+- Accessories: 30 days f...
+
+[Retention Agent] Retrieved from care_plus_benefits.md:
+  # TechFlow Care+ Benefits Guide
+
+## Care+ Premium ($12.99/month)
+
+### Accident Protection
+- **Screen Repair**: Zero deductible for cracked screens (normally $300+ repair cost)
+- **Water Damage**: Full...
+[Retention Agent] Calculating retention offer for tier=premium, reason=service_value...
+[Retention Agent] Generated offer: explain_benefits
+[Retention Agent] Offer details: N/A
+
+[Retention Agent] Generated response:
+  Hi Lisa, I completely understand why you're asking that question. It's natural to wonder about the value of an insurance plan when you haven't needed to use it, and it's great that your device has been trouble-free for 8 months!
+
+However, the Care+ Premium plan you have offers quite a bit of peace o...
+[Graph] Waiting for user response or retention in progress - ending
+
+================================================================================
+
+📍 Current Agent: Final State
+
+================================================================================
+
+📊 State Information:
+  Intent: cancel_insurance
+  Customer Email: lisa.kim@email.com
+  Cancellation Reason: service_value
+  Customer: Lisa Kim (premium tier)
+  Plan: Care+ Premium
+
+  💰 Retention Offer:
+    Type: explain_benefits
+    Description: N/A
+
+  📚 Retrieved RAG Context (3 chunks):
+    1. [care_plus_benefits.md] [care_plus_benefits.md] ## Care+ Basic ($6.99/month)
+
+### Core Protection
+- **Screen Repair**: $29 deductible for cracked screen repairs
+- **Hardware ...
+    2. [return_policy.md] [return_policy.md] # TechFlow Electronics Return Policy
+
+## Return Windows
+
+### Standard Return Policy
+- Unopened devices: 30 days from purchase date
+...
+    3. [care_plus_benefits.md] [care_plus_benefits.md] # TechFlow Care+ Benefits Guide
+
+## Care+ Premium ($12.99/month)
+
+### Accident Protection
+- **Screen Repair**: Zero deductible...
+
+================================================================================
+
+📋 Summary:
+  Intent Classified: cancel_insurance
+  Customer Data Retrieved: Yes
+  RAG Context Retrieved: 3 chunks
+  Retention Offer Generated: Yes
+  Final Action: None
+
+================================================================================
+
+
+Press Enter to continue to next scenario...
+
+================================================================================
+
+🧪 TEST SCENARIO: 4. Technical support request
+
+================================================================================
+
+
+💬 User Message: My phone battery is draining really fast. Can you help me fix this?
+📧 Customer Email: james.wilson@email.com
+
+[Orchestrator] Intent: technical_issue
+[Orchestrator] Email: james.wilson@email.com
+[Graph] Routing to tech_support_agent for technical support
+
+[Tech Support Agent] Processing technical issue
+[Tech Support Agent] Customer: james.wilson@email.com
+[Tech Support Agent] Querying RAG for troubleshooting guide...
+
+[Tech Support Agent] Retrieved from troubleshooting_guide.md:
+  # TechFlow Device Troubleshooting Guide
+
+## Common Phone Issues
+
+### Overheating Problems
+**Symptoms**: Device feels hot, performance slows down, battery drains quickly
+
+**Quick Fixes**:
+- Remove phon...
+
+[Tech Support Agent] Retrieved from troubleshooting_guide.md:
+  ### Customer Can Handle
+- Software updates and basic settings
+- App-related problems
+- Basic connectivity troubleshooting
+- Minor cosmetic issues
+
+## Support Scripts
+
+### Setting Expectations
+"I'll wa...
+
+[Tech Support Agent] Retrieved from troubleshooting_guide.md:
+  **Step 2 - Software Issues**:
+- Restart device while connected to charger
+- Update device software
+- Reset device settings if problems persist
+
+**Step 3 - Hardware Diagnosis**:
+- Test wireless chargin...
+
+[Tech Support Agent] Retrieved from care_plus_benefits.md:
+  # TechFlow Care+ Benefits Guide
+
+## Care+ Premium ($12.99/month)
+
+### Accident Protection
+- **Screen Repair**: Zero deductible for cracked screens (normally $300+ repair cost)
+- **Water Damage**: Full...
+
+[Tech Support Agent] Generated response:
+  Hi James,
+
+I understand your phone battery is draining really fast, and that can certainly be frustrating! I'll walk you through some common steps that often help resolve this issue. These steps focus on optimizing your phone's settings to reduce battery consumption.
+
+Please try these steps one by o...
+
+================================================================================
+
+📍 Current Agent: Final State
+
+================================================================================
+
+📊 State Information:
+  Intent: technical_issue
+  Customer Email: james.wilson@email.com
+
+  📚 Retrieved RAG Context (4 chunks):
+    1. [troubleshooting_guide.md] [troubleshooting_guide.md] # TechFlow Device Troubleshooting Guide
+
+## Common Phone Issues
+
+### Overheating Problems
+**Symptoms**: Device feels hot, p...
+    2. [troubleshooting_guide.md] [troubleshooting_guide.md] ### Customer Can Handle
+- Software updates and basic settings
+- App-related problems
+- Basic connectivity troubleshooting
+-...
+    3. [troubleshooting_guide.md] [troubleshooting_guide.md] **Step 2 - Software Issues**:
+- Restart device while connected to charger
+- Update device software
+- Reset device settings ...
+
+  ✅ Final Action: routed_to_support
+
+================================================================================
+
+📋 Summary:
+  Intent Classified: technical_issue
+  Customer Data Retrieved: No
+  RAG Context Retrieved: 4 chunks
+  Retention Offer Generated: No
+  Final Action: routed_to_support
+
+================================================================================
+
+
+Press Enter to continue to next scenario...
+
+================================================================================
+
+🧪 TEST SCENARIO: 5. Billing discrepancy inquiry
+
+================================================================================
+
+
+💬 User Message: I was charged $12.99 this month but I thought my plan was $6.99. Can you explain the charge?
+📧 Customer Email: maria.garcia@email.com
+
+
+Error in orchestrator agent: Error calling model 'gemini-2.5-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash\nPlease retry in 57.231325248s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.5-flash', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '57s'}]}}
+
+[Orchestrator] Intent: general_question
+[Orchestrator] Email: maria.garcia@email.com
+[Graph] Intent 'general_question' - ending conversation
+
+================================================================================
+
+📍 Current Agent: Final State
+
+================================================================================
+
+📊 State Information:
+  Intent: general_question
+  Customer Email: maria.garcia@email.com
+
+================================================================================
+
+📋 Summary:
+  Intent Classified: general_question
+  Customer Data Retrieved: No
+  RAG Context Retrieved: 0 chunks
+  Retention Offer Generated: No
+  Final Action: None
+
+================================================================================
+
+
+Press Enter to continue to next scenario...
+✅ All test scenarios completed!
